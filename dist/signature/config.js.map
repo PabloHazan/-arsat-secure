@@ -1,0 +1,1 @@
+{"version":3,"file":"config.js","sourceRoot":"","sources":["../../src/signature/config.ts"],"names":[],"mappings":";;;AACA,yDAAqD;AAExC,QAAA,UAAU,GAAkB;IACvC,MAAM,EAAE,EAAE;CACX,CAAC;AACW,QAAA,QAAQ,GAAG;IACtB,WAAW,EAAE,EAAE;IACf,SAAS,EAAE,WAAW;CACvB,CAAC;AAEK,MAAM,UAAU,GAAG,CAAC,MAAqB,EAAE,EAAE,CAClD,IAAA,wBAAU,EAAC,MAAM,EAAE,kBAAU,CAAC,CAAC;AADpB,QAAA,UAAU,cACU"}

@@ -1,0 +1,3 @@
+import { SecureFunctions } from "./types";
+export declare const createSecureFunctions: <EntityType extends Object, SensitivePropertyKey extends keyof EntityType, SignatureKey extends string = "signature">(sensitivePropertyName: SensitivePropertyKey, sensitiveKeys: Array<keyof EntityType[SensitivePropertyKey]>, signatureKey?: SignatureKey) => SecureFunctions<EntityType, SensitivePropertyKey>;
+//# sourceMappingURL=create-secure-functions.d.ts.map

@@ -1,0 +1,4 @@
+import { SecureEntity } from "../signature";
+import { SecurizeFn } from "./types";
+export declare const createSecurizeInfoFn: <EntityType extends Object, SensitivePropertyKey extends keyof EntityType, SignatureKey extends string>(sensitivePropertyName: SensitivePropertyKey, addSecureSignature: <Obj extends EntityType[SensitivePropertyKey]>(object: Obj, extraSecret?: string) => SecureEntity<Obj, SignatureKey>, encrypt: (data: SecureEntity<EntityType[SensitivePropertyKey], SignatureKey>) => string) => SecurizeFn<EntityType, SensitivePropertyKey>;
+//# sourceMappingURL=create-securize-info-funtion.d.ts.map

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true ,
+    "types": ["node", "jest"],
+    "typeRoots": ["./node_modules/@types"],
+  },
+  "include": ["src/**/*", "__tests__/signature/secureSignature.test.ts", "src/signature/index.ts"]
+}
