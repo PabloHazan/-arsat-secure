@@ -9,12 +9,9 @@ export const createSecurizeInfoFn =
     SignatureKey extends string
   >(
     sensitivePropertyName: SensitivePropertyKey,
-    addSecureSignature: <Obj extends EntityType[SensitivePropertyKey]>(
-      object: Obj,
-      extraSecret?: string
-    ) => SecureEntity<Obj, SignatureKey>,
-    encrypt: (
-      data: SecureEntity<EntityType[SensitivePropertyKey], SignatureKey>
+    encryptAndSign: (
+      entity: EntityType[SensitivePropertyKey],
+      extraSecret?: string | undefined
     ) => string
   ): SecurizeFn<EntityType, SensitivePropertyKey> =>
   (
@@ -30,10 +27,10 @@ export const createSecurizeInfoFn =
     } = entity;
 
     // Create the variable signedSensitiveData by signing sensitiveData
-    const signedSensitiveData = addSecureSignature(sensitiveData, extraSecret);
-
-    // Create the variable encryptedData by encrypting signedSensitiveData
-    const encryptedData = encrypt(signedSensitiveData);
+    const encryptedData = encryptAndSign(
+      entity[sensitivePropertyName],
+      extraSecret
+    );
 
     // Retornar un nuevo objeto idéntico al recibido pero reemplazando el valor de la clave SensitivePropertyKey
     // @ts-ignore

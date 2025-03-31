@@ -1,0 +1,3 @@
+import { SecureEntity } from "../signature";
+export declare const createDecryptAndVerifyFunction: <EntityType extends Object, SignatureKey extends string>(signatureKey: SignatureKey, verifySecureSignature: <Obj extends EntityType>(object: SecureEntity<Obj, SignatureKey>, extraSecret?: string) => void, decrypt: (encryptedData: string) => SecureEntity<EntityType, SignatureKey>) => (encryptedSignedEntity: string, extraSecret?: string) => EntityType;
+//# sourceMappingURL=create-decrypt-and-verify-function.d.ts.map

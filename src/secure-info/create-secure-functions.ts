@@ -1,5 +1,4 @@
-import { createEncryptSensitiveDataFunctions } from "../encrypt";
-import { createSignatureFunctions, SecureEntity } from "../signature";
+import { createEncryptAndSignFunctions } from "../authenticated-encryption";
 import { createRecoverySecureInfoFn } from "./create-recovery-secure-info-function";
 import { createSecurizeInfoFn } from "./create-securize-info-funtion";
 import { RecoveryFn, SecureFunctions, SecurizeFn } from "./types";
@@ -14,28 +13,20 @@ export const createSecureFunctions = <
   sensitiveKeys: Array<keyof EntityType[SensitivePropertyKey]>,
   signatureKey: SignatureKey = "signature" as SignatureKey
 ): SecureFunctions<EntityType, SensitivePropertyKey> => {
-  const { addSecureSignature, verifySecureSignature } =
-    createSignatureFunctions<
-      // @ts-ignore
-      EntityType[SensitivePropertyKey],
-      SignatureKey
-    >(sensitiveKeys, signatureKey);
-
-  // Crear las funciones encrypt y decrypt con los tipos genéricos adecuados
-  const { encrypt, decrypt } =
-    createEncryptSensitiveDataFunctions<
-      SecureEntity<EntityType[SensitivePropertyKey], SignatureKey>
-    >();
+  const { encryptAndSign, decryptAndVerify } = createEncryptAndSignFunctions<
+    // @ts-ignore
+    EntityType[SensitivePropertyKey],
+    SignatureKey
+  >(sensitiveKeys, signatureKey);
 
   const securizeInfo: SecurizeFn<EntityType, SensitivePropertyKey> =
-    createSecurizeInfoFn(sensitivePropertyName, addSecureSignature, encrypt);
+    createSecurizeInfoFn(sensitivePropertyName, encryptAndSign);
 
   const recoverySecureInfo: RecoveryFn<EntityType, SensitivePropertyKey> =
     createRecoverySecureInfoFn(
       sensitivePropertyName,
       signatureKey,
-      verifySecureSignature,
-      decrypt
+      decryptAndVerify
     );
 
   return { securizeInfo, recoverySecureInfo };

@@ -10,13 +10,10 @@ export const createRecoverySecureInfoFn =
   >(
     sensitivePropertyName: SensitivePropertyKey,
     signatureKey: SignatureKey,
-    verifySecureSignature: <Obj extends EntityType[SensitivePropertyKey]>(
-      object: SecureEntity<Obj, SignatureKey>,
-      extraSecret?: string
-    ) => void,
-    decrypt: (
-      encryptedData: string
-    ) => SecureEntity<EntityType[SensitivePropertyKey], SignatureKey>
+    decryptAndVerify: (
+      encryptedSignedEntity: string,
+      extraSecret?: string | undefined
+    ) => EntityType[SensitivePropertyKey]
   ): RecoveryFn<EntityType, SensitivePropertyKey> =>
   (
     secureEntity: Omit<EntityType, SensitivePropertyKey> & {
@@ -35,12 +32,7 @@ export const createRecoverySecureInfoFn =
       secureEntity;
 
     // Desencriptar la información sensible
-    const decryptedData = decrypt(encryptedSensitiveData);
-
-    // Verificar la firma de la información sensible
-    verifySecureSignature(decryptedData, extraSecret);
-
-    const { [signatureKey]: _, ...sensitiveData } = decryptedData;
+    const sensitiveData = decryptAndVerify(encryptedSensitiveData, extraSecret);
 
     // Retornar un nuevo objeto idéntico al recibido pero reemplazando el valor de la clave SensitivePropertyKey
     // @ts-ignore

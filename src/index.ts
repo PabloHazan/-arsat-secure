@@ -15,3 +15,8 @@ export {
   SecureFunctions,
   createSecureFunctions,
 } from "./secure-info";
+
+export {
+  AuthenticatedEncrytionFunctions,
+  createEncryptAndSignFunctions,
+} from "./authenticated-encryption";

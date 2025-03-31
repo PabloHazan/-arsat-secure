@@ -13,13 +13,11 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSecurizeInfoFn = void 0;
 // Función para encriptar la información sensible y agregar la firma
-const createSecurizeInfoFn = (sensitivePropertyName, addSecureSignature, encrypt) => (entity, extraSecret = "") => {
+const createSecurizeInfoFn = (sensitivePropertyName, encryptAndSign) => (entity, extraSecret = "") => {
     // Separar el valor de la clave SensitivePropertyKey
     const _a = entity, _b = sensitivePropertyName, sensitiveData = _a[_b], entityWithoutSensitiveData = __rest(_a, [typeof _b === "symbol" ? _b : _b + ""]);
     // Create the variable signedSensitiveData by signing sensitiveData
-    const signedSensitiveData = addSecureSignature(sensitiveData, extraSecret);
-    // Create the variable encryptedData by encrypting signedSensitiveData
-    const encryptedData = encrypt(signedSensitiveData);
+    const encryptedData = encryptAndSign(entity[sensitivePropertyName], extraSecret);
     // Retornar un nuevo objeto idéntico al recibido pero reemplazando el valor de la clave SensitivePropertyKey
     // @ts-ignore
     return Object.assign(Object.assign({}, entityWithoutSensitiveData), { [sensitivePropertyName]: encryptedData });

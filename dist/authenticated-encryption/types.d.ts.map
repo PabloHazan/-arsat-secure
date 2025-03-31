@@ -1,0 +1,1 @@
+{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../src/authenticated-encryption/types.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,+BAA+B,CAAC,UAAU,SAAS,MAAM;IACxE,cAAc,EAAE,CAAC,MAAM,EAAE,UAAU,EAAE,WAAW,CAAC,EAAE,MAAM,KAAK,MAAM,CAAC;IACrE,gBAAgB,EAAE,CAChB,qBAAqB,EAAE,MAAM,EAC7B,WAAW,CAAC,EAAE,MAAM,KACjB,UAAU,CAAC;CACjB"}
